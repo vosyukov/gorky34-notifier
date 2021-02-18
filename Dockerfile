@@ -13,7 +13,7 @@
 # https://www.bretfisher.com/node-docker-good-defaults/
 # http://goldbergyoni.com/checklist-best-practice-of-node-js-in-production/
 
-FROM node:12-alpine as builder
+FROM node:12.20.2-buster as builder
 
 USER root
 RUN apk update \
@@ -33,7 +33,7 @@ RUN npm ci && npm run build
 
 # ---
 
-FROM node:12-alpine
+FROM node:12.20.2-buster
 
 USER root
 RUN apk update \
