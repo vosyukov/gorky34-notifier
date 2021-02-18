@@ -15,6 +15,10 @@
 
 FROM node:12-alpine as builder
 
+USER root
+
+RUN apk add python
+
 ENV NODE_ENV build
 
 USER node
@@ -28,6 +32,10 @@ RUN apk add python && npm ci && npm run build
 
 FROM node:12-alpine
 
+USER root
+
+RUN apk add python
+
 ENV NODE_ENV production
 
 USER node
@@ -36,6 +44,6 @@ WORKDIR /home/node
 COPY --from=builder /home/node/package*.json /home/node/
 COPY --from=builder /home/node/dist/ /home/node/dist/
 
-RUN apk add python && npm ci
+RUN npm ci
 
 CMD ["node", "dist/server.js"]
