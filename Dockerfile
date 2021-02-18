@@ -26,7 +26,7 @@ WORKDIR /home/node
 
 COPY . /home/node
 
-RUN apk add python && npm ci && npm run build
+RUN npm ci && npm run build
 
 # ---
 
