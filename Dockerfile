@@ -17,7 +17,7 @@ FROM node:12-alpine as builder
 
 USER root
 
-RUN apk add python make cmake
+RUN apk add python make cmake gcc
 RUN npm i node-gyp -g
 
 ENV NODE_ENV build
@@ -35,7 +35,7 @@ FROM node:12-alpine
 
 USER root
 
-RUN apk add python make cmake
+RUN apk add python make cmake gcc
 RUN npm i node-gyp -g
 
 ENV NODE_ENV production
