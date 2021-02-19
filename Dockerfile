@@ -16,10 +16,10 @@
 FROM node:12.20.2-buster as builder
 
 USER root
-RUN apk update \
-    && apk add sqlite \
-    && apk add socat
-RUN apk add python make cmake gcc
+# RUN apk update \
+#     && apk add sqlite \
+#     && apk add socat
+# RUN apk add python make cmake gcc
 RUN npm i node-gyp -g
 
 ENV NODE_ENV build
@@ -36,10 +36,10 @@ RUN npm ci && npm run build
 FROM node:12.20.2-buster
 
 USER root
-RUN apk update \
-    && apk add sqlite \
-    && apk add socat
-RUN apk add python make cmake gcc
+# RUN apk update \
+#     && apk add sqlite \
+#     && apk add socat
+# RUN apk add python make cmake gcc
 RUN npm i node-gyp -g
 
 ENV NODE_ENV production
