@@ -12,7 +12,7 @@ import { StatusCheckerModule } from './status-cheker/status-checker.module';
     StatusCheckerModule,
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
-      database: 'db.sql',
+      database: 'db/db.sql',
       entities: [RequestEntity],
       synchronize: true,
       logging: true,

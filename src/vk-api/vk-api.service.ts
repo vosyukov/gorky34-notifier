@@ -1,7 +1,6 @@
 import fetch from 'node-fetch';
 import { Injectable } from '@nestjs/common';
-
-const GROUP_ID = '170060235';
+import { VK_ACCESS_TOKEN, VK_GROUP_ID } from './../env';
 
 export interface Topic {
   id: number;
@@ -25,7 +24,7 @@ export interface Comment {
 export class VkApiService {
   public async createComment(topicId: string, text: string): Promise<void> {
     return this.sendRequest('board.createComment', {
-      group_id: GROUP_ID,
+      group_id: VK_GROUP_ID,
       topic_id: topicId,
       from_group: '1',
       guid: Date.now().toString(),
@@ -34,7 +33,7 @@ export class VkApiService {
 
   public async getGroupManagers(): Promise<Manager[]> {
     const { items } = await this.sendRequest('groups.getMembers', {
-      group_id: GROUP_ID,
+      group_id: VK_GROUP_ID,
       filter: 'managers',
     });
 
@@ -43,7 +42,7 @@ export class VkApiService {
 
   public async getComments(topicId: number): Promise<Comment[]> {
     const { items } = await this.sendRequest('board.getComments', {
-      group_id: GROUP_ID,
+      group_id: VK_GROUP_ID,
       topic_id: String(topicId),
       sort: 'asc',
     });
@@ -53,7 +52,7 @@ export class VkApiService {
 
   public async getFirstComments(topicId: number): Promise<Comment> {
     const { items } = await this.sendRequest('board.getComments', {
-      group_id: GROUP_ID,
+      group_id: VK_GROUP_ID,
       topic_id: String(topicId),
       sort: 'asc',
     });
@@ -63,7 +62,7 @@ export class VkApiService {
 
   public async createTopic(title: string, text: string): Promise<number> {
     const topicId = await this.sendRequest('board.addTopic', {
-      group_id: GROUP_ID,
+      group_id: VK_GROUP_ID,
       title,
       text,
       from_group: '1',
@@ -74,7 +73,7 @@ export class VkApiService {
 
   public editTopic(topicId: number, title: string): Promise<void> {
     return this.sendRequest('board.editTopic', {
-      group_id: GROUP_ID,
+      group_id: VK_GROUP_ID,
       topic_id: String(topicId),
       title,
     });
@@ -84,7 +83,7 @@ export class VkApiService {
     const result: { items: Topic[] } = await this.sendRequest(
       'board.getTopics',
       {
-        group_id: GROUP_ID,
+        group_id: VK_GROUP_ID,
         preview: '1',
       },
     );
@@ -102,12 +101,12 @@ export class VkApiService {
     const p = keys.map((key, index) => `${key}=${values[index]}&`).join('');
     console.log(
       encodeURI(
-        `https://api.vk.com/method/${method}?${p}&access_token=caf3f07bf443a3812b025de9240480da20da1269c06c021f3c6094a5336f6cc6cd98206874a96a29684f1&v=5.130`,
+        `https://api.vk.com/method/${method}?${p}&access_token=${VK_ACCESS_TOKEN}&v=5.130`,
       ),
     );
     const response = await fetch(
       encodeURI(
-        `https://api.vk.com/method/${method}?${p}&access_token=caf3f07bf443a3812b025de9240480da20da1269c06c021f3c6094a5336f6cc6cd98206874a96a29684f1&v=5.130`,
+        `https://api.vk.com/method/${method}?${p}&access_token=${VK_ACCESS_TOKEN}&v=5.130`,
       ),
     );
 

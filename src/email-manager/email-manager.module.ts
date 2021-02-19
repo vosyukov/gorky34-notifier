@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 
+import { SMTP_HOST, SMTP_PORT, EMAIL_LOGIN, EMAIL_PASSWORD } from './../env';
 import { EmailManagerService } from './email-manager.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { EmailSenderService } from './email-sender.service';
@@ -8,12 +9,12 @@ import { EmailSenderService } from './email-sender.service';
   imports: [
     MailerModule.forRoot({
       transport: {
-        host: 'smtp.yandex.com',
-        port: 465,
+        host: SMTP_HOST,
+        port: SMTP_PORT,
         secure: true,
         auth: {
-          user: 'o123',
-          pass: '123',
+          user: EMAIL_LOGIN,
+          pass: EMAIL_PASSWORD,
         },
       },
       // preview: true,
