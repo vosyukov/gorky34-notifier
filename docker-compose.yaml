@@ -1,0 +1,15 @@
+version: "2.4"
+
+services:
+  gorky34-notifier:
+    container_name: gorky34-notifier-dev
+    image: node:12.20.2-buster
+    # ports:
+    #   - ${APP_PORT}:${APP_PORT}
+    #   - ${APP_DEBUG_PORT}:${APP_DEBUG_PORT}
+    env_file:
+      - .env
+    volumes:
+      - ./:/app:cached
+    working_dir: /app
+    command: npm run start:dev
