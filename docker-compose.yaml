@@ -4,9 +4,8 @@ services:
   gorky34-notifier:
     container_name: gorky34-notifier-dev
     image: node:12.20.2-buster
-    # ports:
-    #   - ${APP_PORT}:${APP_PORT}
-    #   - ${APP_DEBUG_PORT}:${APP_DEBUG_PORT}
+    ports:
+      - ${APP_PORT}:${APP_PORT}
     env_file:
       - .env
     volumes:

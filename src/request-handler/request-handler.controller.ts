@@ -17,7 +17,7 @@ export class RequestHandlerController {
     const { type = null, object = null } = body;
 
     if (type === 'confirmation') {
-      return '974b8923';
+      return '31f85b9f';
     } else if (type === 'lead_forms_new') {
       const { user_id, answers } = object;
       await this.requestHandlerService.create(

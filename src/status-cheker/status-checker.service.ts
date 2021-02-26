@@ -16,7 +16,7 @@ export class StatusCheckerService {
     @InjectRepository(RequestEntity)
     private readonly requestRepository: Repository<RequestEntity>,
   ) {
-    // this.get();
+    this.get();
   }
   public async get() {
     const managers = await this.vkApiService.getGroupManagers();
